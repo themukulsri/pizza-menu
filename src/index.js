@@ -1,5 +1,6 @@
 import React from "react";
 import reactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,7 +49,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <h1>Hello React!</h1>
       <Header />
       <Menu />
@@ -58,16 +59,40 @@ function App() {
 }
 
 function Header() {
-  return <h1>Fast React Pizza Co.</h1>;
+  // return <h1 style={{color:"red", fontSize:"48px"}} className="header   ">Fast React Pizza Co.</h1>;
+  // style={};
+  return <header className="header">
+    <h1 style={{color:"red", fontSize:"48px"}} >Fast React Pizza Co.</h1>;
+    </header>
 }
 function Menu() {
   return (
-    <div>
+    <main className='menu'>
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <div>
+        {pizzaData.map((pizza) => (
+          <Pizza name={pizza.name} />
+        ))}
+        </div>
+      {/* <Pizza name='Pizza Spinaci' ingredients='Tomato, mozarella, spinach, and ricotta cheese'
+      photoName="pizzas/spinaci.jpg" price={10} />
+      <Pizza name="Pizza Funghi" ingredients="Tomato, Mashroom, Cheese" photoName="pizzas/funghi.jpg" 
+      price={12} /> */}
+      
+    </main>
+  );
+}
+function Pizza(props) {
+  console.log(props);
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name}/>
+      <div>
+
+      <h3>{props.name}</h3>
+      <p>{props.ingredients}</p>
+      <span>{props.price}</span>
+      </div>
     </div>
   );
 }
@@ -81,20 +106,12 @@ function Footer() {
   //   else alert("Sorry we're closed!");
   console.log(hour);
   return (
-    <footer>{new Date().toLocaleTimeString()} We're currently open</footer>
+    <footer className="footer">{new Date().toLocaleTimeString()} We're currently open</footer>
   );
   //   return React.createElement("footer", null, "We're open now!");
 }
 
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h2>Pizza Spinaci</h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
-  );
-}
+
 const root = reactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
